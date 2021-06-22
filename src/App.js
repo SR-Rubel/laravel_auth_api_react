@@ -1,10 +1,14 @@
 
 import './App.scss';
+import Header from './components/Header';
+import StateProvider from './State_container'
 
 function App() {
   return (
     <div className="App">
-      hello from app
+      <StateProvider>
+        <Header />
+      </StateProvider>
     </div>
   );
 }
