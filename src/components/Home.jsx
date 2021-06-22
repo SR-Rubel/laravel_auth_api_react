@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Forgot() {
+function Home() {
     return (
         <div>
-            forgot
+            Home component
         </div>
     )
 }
 
-export default Forgot
+export default Home

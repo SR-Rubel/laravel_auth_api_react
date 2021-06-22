@@ -1,4 +1,3 @@
-
 import './App.scss';
 import Header from './components/Header';
 import StateProvider from './State_container'
