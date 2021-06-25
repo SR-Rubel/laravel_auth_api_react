@@ -12,20 +12,23 @@ import Forgot from './Forgot'
 
 function Header() {
 
-    const [user,setUser]=useContext(AllData);
+    const [user,setUser,logged,setLogged]=useContext(AllData);
+    localStorage.getItem('token')?setLogged(true):setLogged(false)
+
+    console.log('[====logged====]',logged)
 
     return (
         <div>
             <Router>
-                <Nav />
+                    <Route component={Nav} />
                 
                 <Switch>
                     <Route exact component={Home} path='/home' />
                     <Route exact component={Profile} path='/profile' />
                     <Route exact component={Login} path='/login' />
                     <Route exact component={Register} path='/register' />
-                    <Route exact component={Reset} path='/reset' />
-                    <Route exact component={Forgot} path='/forgot' />
+                    <Route exact component={Reset} path='/reset-password/:token' />
+                    <Route exact component={Forgot} path='/forgot-password' />
                 </Switch>
             </Router>
         </div>

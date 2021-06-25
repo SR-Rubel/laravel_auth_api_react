@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 
-function Register() {
+function Register(props) {
     const [register,setRegister]=useState({})
     console.log(register);
 
@@ -10,8 +10,8 @@ function Register() {
 
         axios.post('/register',register)
         .then(response=>{
-            console.log(response)
-            // localStorage.setItem('token',response.data.token)
+            localStorage.setItem('token',response.data.token);
+            props.history.push('/profile');
         })
         .catch(error=>{
             console.log(error);

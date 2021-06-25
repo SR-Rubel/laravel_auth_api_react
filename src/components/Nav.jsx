@@ -1,7 +1,32 @@
+import axios from 'axios';
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {useContext,AllData} from './Contex_importer'
 
-function Nav() {
+function Nav(props) {
+
+    const [user,setUser,logged,setLogged]=useContext(AllData);
+
+    const logout=e=>{
+        e.preventDefault()
+
+        axios.get('/logout',{
+            headers: {
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+          })
+        .then(response=>{
+            if(response.data.status){
+                localStorage.clear()
+                setLogged(false);
+                props.history.push('/login');
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
@@ -20,7 +45,7 @@ function Nav() {
                 
             </ul>
             <form className="d-flex align-items-center">
-                <Link className='nav-link' to='/login'>Login</Link>|<Link className='nav-link' to='register'>Register</Link>
+                {!logged?<div className="d-flex align-items-center"><Link className='nav-link' to='/login'>Login</Link>|<Link className='nav-link' to='register'>Register</Link></div>:<Link className='nav-link' onClick={e=>logout(e)}>LogOut</Link>}
             </form>
             </div>
         </div>
